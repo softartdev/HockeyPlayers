@@ -4,10 +4,15 @@ plugins {
     id 'org.jetbrains.kotlin.multiplatform'
     id 'com.android.library'
     id 'kotlin-android-extensions'
+    id 'com.squareup.sqldelight'
 }
 group = 'com.example.sqldelight'
 version = '1.0-SNAPSHOT'
-
+sqldelight {
+    HockeyDb {
+        packageName = "com.example.sqldelight.hockey"
+    }
+}
 repositories {
     gradlePluginPortal()
     google()
@@ -42,13 +47,19 @@ kotlin {
             dependencies {
                 implementation kotlin('stdlib-jdk7')
                 implementation 'androidx.core:core-ktx:1.2.0'
+                implementation "com.squareup.sqldelight:android-driver:$sqldelight_version"
             }
         }
         androidTest {
-
+            dependencies {
+                implementation 'org.jetbrains.kotlin:kotlin-test-junit'
+                implementation "com.squareup.sqldelight:sqlite-driver:$sqldelight_version"
+            }
         }
         iosMain {
-
+            dependencies {
+                implementation "com.squareup.sqldelight:native-driver:$sqldelight_version"
+            }
         }
         iosTest {
 
