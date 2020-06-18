@@ -1,39 +1,61 @@
 plugins {
-    id 'com.android.application'
-    id 'org.jetbrains.kotlin.android'
-    id 'kotlin-android-extensions'
+  id 'com.android.application'
+  id 'org.jetbrains.kotlin.android'
+  id 'kotlin-android-extensions'
 }
-group = 'com.example.sqldelight'
-version = '1.0-SNAPSHOT'
 
-repositories {
-    gradlePluginPortal()
-    google()
-    jcenter()
-    mavenCentral()
-    maven {
-        url 'https://dl.bintray.com/kotlin/kotlin-eap'
+android {
+  compileSdkVersion 29
+
+  compileOptions {
+    sourceCompatibility JavaVersion.VERSION_1_7
+    targetCompatibility JavaVersion.VERSION_1_7
+  }
+
+  lintOptions {
+    textOutput 'stdout'
+  }
+
+  defaultConfig {
+    minSdkVersion 24
+    targetSdkVersion 29
+
+    applicationId 'com.example.sqldelight.hockey'
+
+    versionCode 1
+    versionName '1.0'
+  }
+
+  signingConfigs {
+    debug {
+      storeFile file('debug.keystore')
+      storePassword 'android'
+      keyAlias 'android'
+      keyPassword 'android'
     }
+  }
+
+  buildTypes {
+    debug {
+      applicationIdSuffix '.development'
+      signingConfig signingConfigs.debug
+    }
+  }
+}
+repositories {
+  gradlePluginPortal()
+  google()
+  jcenter()
+  mavenCentral()
+  maven {
+    url 'https://dl.bintray.com/kotlin/kotlin-eap'
+  }
 }
 dependencies {
-    implementation project(':shared')
-    implementation 'androidx.core:core-ktx:1.2.0'
-    implementation 'androidx.appcompat:appcompat:1.1.0'
-    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
-    implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk7'
-}
-android {
-    compileSdkVersion 29
-    defaultConfig {
-        applicationId 'com.example.sqldelight.androidApp'
-        minSdkVersion 24
-        targetSdkVersion 29
-        versionCode 1
-        versionName '1.0'
-    }
-    buildTypes {
-        'release' {
-            minifyEnabled false
-        }
-    }
+  implementation project(':shared')
+
+  implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
+  implementation "androidx.recyclerview:recyclerview:1.0.0"
+
+  implementation "com.squareup.sqldelight:android-driver:$sqldelight_version"
 }
