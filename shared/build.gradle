@@ -79,6 +79,9 @@ android {
             minifyEnabled false
         }
     }
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
 }
 task(packForXcode, type: Sync) {
     group = 'build'
