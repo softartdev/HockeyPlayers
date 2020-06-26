@@ -24,10 +24,16 @@ repositories {
 }
 kotlin {
     android()
-    iosX64('ios') {
-        binaries {
-            framework {
-                baseName = 'shared'
+    // Configure iOS.
+    def sdkName = System.getenv("SDK_NAME")
+    if (sdkName != null && sdkName.startsWith("iphoneos")) {
+        iosArm64("ios")
+    } else {
+        iosX64("ios") {
+            binaries {
+                framework {
+                    baseName = 'shared'
+                }
             }
         }
     }
