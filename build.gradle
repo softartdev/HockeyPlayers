@@ -7,9 +7,6 @@ buildscript {
         gradlePluginPortal()
         jcenter()
         google()
-        maven {
-            url 'https://dl.bintray.com/kotlin/kotlin-eap'
-        }
     }
     dependencies {
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
@@ -17,12 +14,18 @@ buildscript {
         classpath "com.squareup.sqldelight:gradle-plugin:$sqldelight_version"
     }
 }
-group = 'com.example.sqldelight'
-version = '1.0-SNAPSHOT'
 
-repositories {
-    mavenCentral()
-    maven {
-        url 'https://dl.bintray.com/kotlin/kotlin-eap'
+allprojects {
+    repositories {
+        mavenCentral()
+        google()
+        jcenter()
+        gradlePluginPortal()
     }
+    group = 'com.example.sqldelight'
+    version = '1.0-SNAPSHOT'
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
 }

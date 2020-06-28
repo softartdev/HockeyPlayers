@@ -4,20 +4,9 @@ plugins {
     id 'kotlin-android-extensions'
     id 'com.squareup.sqldelight'
 }
-group = 'com.example.sqldelight'
-version = '1.0-SNAPSHOT'
 sqldelight {
     HockeyDb {
         packageName = "com.example.sqldelight.hockey"
-    }
-}
-repositories {
-    gradlePluginPortal()
-    google()
-    jcenter()
-    mavenCentral()
-    maven {
-        url 'https://dl.bintray.com/kotlin/kotlin-eap'
     }
 }
 kotlin {
@@ -66,7 +55,6 @@ kotlin {
             }
         }
         iosTest {
-
         }
     }
 }
