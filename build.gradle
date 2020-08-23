@@ -1,7 +1,7 @@
 buildscript {
     ext{
-        sqldelight_version = '1.4.0'
-        kotlin_version = '1.3.72'
+        sqldelight_version = '1.4.4'
+        kotlin_version = '1.4.31'
     }
     repositories {
         gradlePluginPortal()
@@ -10,7 +10,7 @@ buildscript {
     }
     dependencies {
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-        classpath 'com.android.tools.build:gradle:4.0.0'
+        classpath 'com.android.tools.build:gradle:4.1.2'
         classpath "com.squareup.sqldelight:gradle-plugin:$sqldelight_version"
     }
 }
