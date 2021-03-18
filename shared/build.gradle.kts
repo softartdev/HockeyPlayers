@@ -3,6 +3,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
     kotlin("multiplatform")
+    kotlin("native.cocoapods")
     id("com.android.library")
     id("com.squareup.sqldelight")
 }
@@ -19,14 +20,11 @@ kotlin {
         else
             ::iosX64
 
-    iOSTarget("ios") {
-        binaries {
-            framework {
-                baseName = "shared"
-            }
-        }
+    iOSTarget("ios") { }
+    cocoapods {
+        summary = "Some description for a Kotlin/Native module"
+        homepage = "Link to a Kotlin/Native module homepage"
     }
-
     sourceSets {
         val commonMain by getting {
             dependencies {
@@ -77,14 +75,3 @@ android {
         kotlinOptions.jvmTarget = "1.8"
     }
 }
-val packForXcode by tasks.creating(Sync::class) {
-    group = "build"
-    val mode = System.getenv("CONFIGURATION") ?: "DEBUG"
-    val framework = kotlin.targets.getByName<KotlinNativeTarget>("ios").binaries.getFramework(mode)
-    inputs.property("mode", mode)
-    dependsOn(framework.linkTask)
-    val targetDir = File(buildDir, "xcode-frameworks")
-    from({ framework.outputDirectory })
-    into(targetDir)
-}
-tasks.getByName("build").dependsOn(packForXcode)
